@@ -1,38 +1,79 @@
-.App {
+/* Hero.css */
+.hero {
+  background-color: #111; /* Dark background */
+  color: white;
   text-align: center;
+  padding: 50px 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.hero p {
+  font-size: 1.2rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.rental-info {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin: 20px 0;
+}
+
+.rental-card {
+  background-color: #ff4b4b; /* Red color */
+  padding: 20px;
+  margin: 0 10px;
+  border-radius: 10px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.booking-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.form-group {
+  margin: 0 10px;
+}
+
+.rent-now-btn {
+  background-color: #ff4b4b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Header.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ff4b4b; /* Red color */
+  padding: 20px;
+}
+
+.nav a {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 768px) {
+  .rental-info {
+      flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+
+  .form-group {
+      width: 100%;
+      margin-bottom: 20px;
   }
 }
