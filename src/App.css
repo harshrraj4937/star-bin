@@ -30,7 +30,6 @@
   position: relative;
     width: 100%;
     height: 100vh; /* Full viewport height */
-    /* background-image: url('path_to_your_image.jpg'); Set your background image */
     background-size: cover; /* Ensure the image covers the entire area */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent image from repeating */
@@ -48,13 +47,36 @@
 }
 
 .booking-form {
+  border: 1px solid white;
+  border-radius: 10px 50px;
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* Arrange elements in a column (rows) */
+  align-items: center;
   margin-top: 20px;
+  width: 100%; /* Ensures it takes up full width */
+  max-width: fit-content;
+}
+.form-label{
+  padding-right: 4%;
+}
+.form-group {
+  margin: 10px 0; /* Adds vertical spacing between form groups */
+  width: 100%; /* Full width for each form group */
 }
 
-.form-group {
-  margin: 0 10px;
+.first-row {
+  width: 50%; /* Center and limit the width of the first row */
+  margin-top: 3%;
+}
+
+.second-row {
+  display: flex; /* Use flexbox for two columns */
+  justify-content: space-between;
+  width: 70%; /* Set width for the two-column layout */
+}
+
+.second-row .form-group {
+  width: 48%; /* Ensure both form-groups share the row equally */
 }
 
 .rent-now-btn {
@@ -64,6 +86,9 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
+  align-self: center; /* Center the button */
+  margin-bottom: 2%;
 }
 
 /* Responsive design */
