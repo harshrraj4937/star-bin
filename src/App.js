@@ -42,6 +42,8 @@ const Header = () => {
 
 const Hero = () => {
   return (
+    <div className="scooty-container">
+      {/* <img src={scootyImage} alt="Scooty" className="scooty-image" /> */}this is scooty-container
       <div className="hero">
           <h1>
               Rent Bike & Scooty Now In <span>Your City</span>
@@ -65,9 +67,9 @@ const Hero = () => {
           </div>
 
           {/* Scooty Image Section */}
-          <div className="scooty-container">
-              <img src={scootyImage} alt="Scooty" className="scooty-image" />
-          </div>
+          
+             
+          
 
           {/* Booking Form Section */}
           <div className="booking-form">
@@ -85,6 +87,7 @@ const Hero = () => {
               </div>
               <button className="rent-now-btn">Rent Now</button>
           </div>
+      </div>
       </div>
   );
 };
