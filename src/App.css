@@ -1,18 +1,9 @@
 /* Hero.css */
 .hero {
-  background-color: #111; /* Dark background */
+  background-color: #111;
   color: white;
   text-align: center;
   padding: 50px 20px;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  font-size: 1.2rem;
 }
 
 .rental-info {
@@ -22,11 +13,23 @@
 }
 
 .rental-card {
-  background-color: #ff4b4b; /* Red color */
+  background-color: #ff4b4b;
   padding: 20px;
   margin: 0 10px;
   border-radius: 10px;
   color: white;
+}
+
+.scooty-container {
+  margin: 20px 0;
+}
+
+.scooty-image {
+  width: 400px; /* Adjust the size based on your design */
+  height: auto;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
 }
 
 .booking-form {
@@ -46,6 +49,23 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .rental-info {
+      flex-direction: column;
+  }
+
+  .scooty-image {
+      width: 100%; /* Full width on smaller screens */
+      height: auto;
+  }
+
+  .form-group {
+      width: 100%;
+      margin-bottom: 20px;
+  }
 }
 
 
