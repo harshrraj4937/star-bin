@@ -1,113 +1,8 @@
-/* Hero.css */
-.hero {
-  background-color: #111;
-  width: 66vw;
-  height: 30vh;
-  color: white;
-  text-align: center;
-  padding: 50px 20px;
-  /* border-radius: 5% */
-  border-radius: 10px 50px;
-}
-
-.rental-info {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.rental-card {
-  background-color: #ff4b4b;
-  padding: 20px;
-  margin: 0 10px;
-  border-radius: 10px;
-  color: white;
-}
-
-.scooty-container {
+* {
   margin: 0;
-  background-image: url('./assets/images/hero-image.jpg');
-  position: relative;
-    width: 100%;
-    height: 100vh; /* Full viewport height */
-    background-size: cover; /* Ensure the image covers the entire area */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent image from repeating */
-    display: flex;
-    justify-content: center; /* Center child horizontally */
-    align-items: center; /* Center child vertically */
+  padding: 0;
+  box-sizing: border-box;
 }
-
-.scooty-image {
-  width: 400px; /* Adjust the size based on your design */
-  height: auto;
-  max-width: 100%;
-  display: block;
-  margin: 0 auto;
-}
-
-.booking-form {
-  border: 1px solid white;
-  border-radius: 10px 50px;
-  display: flex;
-  flex-direction: column; /* Arrange elements in a column (rows) */
-  align-items: center;
-  margin-top: 20px;
-  width: 100%; /* Ensures it takes up full width */
-  max-width: fit-content;
-}
-.form-label{
-  padding-right: 4%;
-}
-.form-group {
-  margin: 10px 0; /* Adds vertical spacing between form groups */
-  width: 100%; /* Full width for each form group */
-}
-
-.first-row {
-  width: 50%; /* Center and limit the width of the first row */
-  margin-top: 3%;
-}
-
-.second-row {
-  display: flex; /* Use flexbox for two columns */
-  justify-content: space-between;
-  width: 70%; /* Set width for the two-column layout */
-}
-
-.second-row .form-group {
-  width: 48%; /* Ensure both form-groups share the row equally */
-}
-
-.rent-now-btn {
-  background-color: #ff4b4b;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  align-self: center; /* Center the button */
-  margin-bottom: 2%;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .rental-info {
-      flex-direction: column;
-  }
-
-  .scooty-image {
-      width: 100%; /* Full width on smaller screens */
-      height: auto;
-  }
-
-  .form-group {
-      width: 100%;
-      margin-bottom: 20px;
-  }
-}
-
 
 /* Header.css */
 .header {
@@ -127,13 +22,137 @@
 .nav a:hover {
   text-decoration: underline;
 }
+
+
+.about-title {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+.title{
+  text-align: center;
+  /* color: #ff4b4b; */
+}
+
+
+/* article css */
+/* Main container for the layout */
+.article-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows the items to wrap on smaller screens */
+  height: 50vh; /* Adjust based on viewport height */
+  width: 100vw; /* Adjust based on viewport width */
+  margin: 0;
+  padding: 0;
+}
+
+/* Image container */
+.image-container {
+  flex: 1; /* This takes up available space on the left */
+  height: 100%; /* Full height */
+  display: flex;
+  justify-content: center;
+  background-image: url("/src/assets/images/aboutuscard.png");
+  align-items: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Ensures the image covers the available space */
+}
+
+/* Flex container for the right side boxes */
+.flex-article-container {
+  display: flex;
+  flex-direction: column; /* Stack divs vertically */
+  flex: 1; /* This takes up available space on the right */
+  justify-content: space-between; /* Adds space between the divs */
+  padding: 10px; /* Adjust padding as needed */
+  height: 100%; /* Full height */
+}
+
+/* Individual box styling */
+.box {
+  border: 1px solid black;
+  padding: 20px;
+  background-color: #f5f0de; /* Color similar to the diagram */
+  text-align: center;
+  flex: 1; /* Each box should take up equal height */
+  margin-bottom: 10px; /* Adds space between boxes */
+}
+
+/* Remove bottom margin for the last box */
+.flex-container .box:last-child {
+  margin-bottom: 0;
+}
+
+/* Media query for smaller screens */
 @media (max-width: 768px) {
-  .rental-info {
-      flex-direction: column;
+  .article-container {
+    flex-direction: column; /* Stack everything vertically */
+    height: auto;
   }
 
-  .form-group {
-      width: 100%;
-      margin-bottom: 20px;
+  .image-container,
+  .flex-container {
+    width: 100%;
+    height: auto; /* Allow elements to adjust based on content */
   }
+  
+  .flex-article-container {
+    flex-direction: row; /* Stack the boxes horizontally on small screens */
+    justify-content: space-around; /* Distribute the boxes evenly */
+  }
+
+  .box {
+    margin-bottom: 0;
+    flex: none; /* Allow natural size based on content */
+  }
+}
+
+/* Box styling */
+.box {
+  display: flex; /* Flexbox to align items horizontally */
+  align-items: center; /* Vertically align the icon and text */
+  border: 1px solid black;
+  padding: 20px;
+  background-color: #f5f0de;
+  width: 100%;
+  height: 100px; /* Adjust based on your design */
+  margin-bottom: 10px;
+}
+
+/* Icon container */
+.icon-container {
+  flex: 0 0 15%; /* Fixed width for the icon (15% of the container's width) */
+  display: flex;
+  justify-content: center; /* Center the icon horizontally */
+  align-items: center; /* Center the icon vertically */
+}
+
+/* Icon image */
+.icon-container img {
+  max-width: 100%; /* Ensure the icon doesn't exceed the container */
+  max-height: 100%; /* Ensure the icon fits within the height of the container */
+  object-fit: contain;
+}
+
+/* Text container */
+.text-container {
+  flex: 1; /* Take up remaining space in the box */
+  padding-left: 15px; /* Add some space between the icon and the text */
+}
+
+/* Title styling */
+.title {
+  margin: 0;
+  font-size: 18px; /* Adjust based on your design */
+  font-weight: bold;
+}
+
+/* Caption styling */
+.caption {
+  margin: 5px 0 0;
+  font-size: 14px; /* Adjust based on your design */
+  color: #555; /* Muted color for the caption */
 }
