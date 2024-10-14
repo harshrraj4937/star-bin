@@ -1,0 +1,75 @@
+.modal {
+    width: 450px;
+    margin: 50px auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .searchBar input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  .citiesSection {
+    margin-bottom: 20px;
+  }
+
+  .citiesSection h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .popularCities {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Increased gap for better spacing */
+  }
+
+  .city {
+    text-align: center;
+    width: 80px; /* Adjusted width for better alignment */
+    margin-bottom: 10px; /* Added bottom margin */
+  }
+
+  .city img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+  }
+
+  .city p {
+    font-size: 14px;
+  }
+
+  .otherCities {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center alignment */
+    gap: 15px; /* Added gap for spacing */
+  }
+
+  .cityItem {
+    font-size: 14px;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  .footer {
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    margin-top: 20px; /* Added margin-top for space */
+  }
+
+  .footer p {
+    font-size: 12px;
+    color: #999;
+  }

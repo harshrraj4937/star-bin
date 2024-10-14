@@ -1,10 +1,14 @@
 import "./App.css";
 import Hero from "./components/hero/hero";
+import Home from "./components/modal/model";
+// import popularCities from "./components/modal/model"
+// import otherCities from "./components/modal/model"
 function App() {
   return (
     <div className="App">
       <Header />
       <Hero />
+      <Home />
       <Footer />
     </div>
   );
