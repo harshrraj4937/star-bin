@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Modal, Input, Button, Row, Col } from 'antd';
+import { Typography, Button, Modal, Input, Row, Col } from 'antd';
 
-const CityModal = () => {
-  const [open, setOpen] = useState(false);
+const { Title, Paragraph } = Typography;
+
+const HeroSection = () => {
+  const [open, setOpen] = useState(false); // State to manage modal visibility
 
   const popularCities = [
-    { name: 'Pune', icon: '/icons/pune.png' },
-    { name: 'Hyderabad', icon: '/icons/Vizag.png' },
-    { name: 'Navi Mumbai', icon: '/icons/mumbai.b2d8933c.jpg' },
-    { name: 'Bangalore', icon: '/icons/Bangalore.png' },
-    { name: 'Nagpur', icon: '/icons/Nagpur.png' },
-    { name: 'Nashik', icon: '/icons/Nashik.png' },
+    { name: 'Pune', icon: '/images/pune.png' },
+    { name: 'Hyderabad', icon: '/images/Vizag.png' },
+    { name: 'Navi Mumbai', icon: '/images/mumbai.b2d8933c.jpg' },
+    { name: 'Bangalore', icon: '/images/Bangalore.png' },
+    { name: 'Nagpur', icon: '/images/Nagpur.png' },
+    { name: 'Nashik', icon: '/images/Nashik.png' },
   ];
 
   const otherCities = [
@@ -32,10 +34,22 @@ const CityModal = () => {
 
   return (
     <div>
-      <Button type="primary" onClick={showModal}>
-        Select City
-      </Button>
+      {/* Hero Section */}
+      <section style={{ backgroundColor: "#f0f2f5", padding: "80px 20px" }}>
+        <div style={{ textAlign: "center", maxWidth: "800px", margin: "0 auto" }}>
+          <Title level={1} style={{ fontSize: "48px", fontWeight: "bold" }}>
+            Rent a Bike with Ease
+          </Title>
+          <Paragraph style={{ fontSize: "18px", marginBottom: "40px" }}>
+            Choose from a wide range of bikes and scooters
+          </Paragraph>
+          <Button type="primary" size="large" onClick={showModal}>
+            Select Your City
+          </Button>
+        </div>
+      </section>
 
+      {/* Modal for City Selection */}
       <Modal
         title="Select Your City"
         open={open}
@@ -86,9 +100,13 @@ const CityModal = () => {
           font-size: 16px;
         }
 
-        .citiesSection {
-          margin-bottom: 20px;
-        }
+ .citiesSection {
+    margin-bottom: 20px;
+    display: flex; /* Flexbox to ensure items align in a row */
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    padding: 5px 0; /* Add padding to avoid text touching edges */
+  } 
 
         .citiesSection h3 {
           font-size: 20px;
@@ -129,4 +147,4 @@ const CityModal = () => {
   );
 };
 
-export default CityModal;
+export default HeroSection;
