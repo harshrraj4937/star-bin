@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Form, Input, Button, Alert, message } from 'antd';
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
-const Login = ({ open, onLoginSuccess }) => {
+const Login = ({ open, onLoginSuccess, onCancel }) => {
   const [form] = Form.useForm();
   const [serverError, setServerError] = useState(null); // State for error messages
   const [isSubmitting, setIsSubmitting] = useState(false); // Track button loading state
@@ -82,6 +82,7 @@ const Login = ({ open, onLoginSuccess }) => {
           Login
         </Button>,
       ]}
+      onCancel={onCancel} // Close modal on pressing the X
     >
       <Form
         form={form}
