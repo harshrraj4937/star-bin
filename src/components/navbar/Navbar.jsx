@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Dropdown, Button } from 'antd';
 import Login from '../login/Login';
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const { Header } = Layout;
 
@@ -59,7 +59,7 @@ const Navbar = () => {
             {
               key: '4',
               label: userName ? (
-                <Dropdown overlay={<Menu items={menuItems} />}>
+                <Dropdown menu={{ items: menuItems }}>
                   <Button type="text" style={{ color: '#ffffff' }}>{`Welcome, ${userName}`}</Button>
                 </Dropdown>
               ) : (
