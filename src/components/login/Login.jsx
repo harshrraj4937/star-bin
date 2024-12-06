@@ -2,13 +2,23 @@ import React, { useState } from 'react';
 import { Modal, Form, Input, Button, Alert, message } from 'antd';
 import {jwtDecode} from "jwt-decode";
 
-const Login = ({ open, onLoginSuccess, onCancel }) => {
+const Login = ({ open, onLoginSuccess }) => {
   const [form] = Form.useForm();
   const [serverError, setServerError] = useState(null); // State for error messages
+  const [isSubmitting, setIsSubmitting] = useState(false); // Track button loading state
+  const [isFormValid, setIsFormValid] = useState(false); // Track form validity
+
+  // Track form changes to dynamically update validation state
+  const handleFormChange = (_, allFields) => {
+    const hasErrors = allFields.some(field => field.errors.length > 0);
+    const hasEmptyFields = allFields.some(field => !field.value);
+    setIsFormValid(!hasErrors && !hasEmptyFields);
+  };
 
   const handleOk = async () => {
     try {
       setServerError(null); // Clear previous errors
+      setIsSubmitting(true); // Set button to loading state
       const values = await form.validateFields(); // Validate form inputs
 
       const response = await fetch('http://localhost:4937/auth/login', {
@@ -18,7 +28,6 @@ const Login = ({ open, onLoginSuccess, onCancel }) => {
       });
 
       const data = await response.json();
-
       if (response.ok) {
         // Save tokens to localStorage
         localStorage.setItem('access_token', data.access_token);
@@ -37,7 +46,7 @@ const Login = ({ open, onLoginSuccess, onCancel }) => {
         if (data.error.includes("invalid password")) {
           setServerError(
             <>
-              Incorrect password. Perhaps <a href="/forgot-password">Forgot Password?</a>
+              Incorrect password. <a href="/forgot-password">Forgot Password?</a>
             </>
           );
         } else if (data.error.includes("user not found")) {
@@ -54,23 +63,31 @@ const Login = ({ open, onLoginSuccess, onCancel }) => {
     } catch (error) {
       console.error('Validation or login error:', error);
       setServerError('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false); // Reset button state
     }
   };
 
   return (
     <Modal
       open={open}
-      onCancel={onCancel}
       footer={[
-        <Button key="cancel" onClick={onCancel}>
-          Cancel
-        </Button>,
-        <Button key="submit" type="primary" onClick={handleOk}>
+        <Button
+          key="submit"
+          type="primary"
+          onClick={handleOk}
+          loading={isSubmitting} // Show spinner while processing
+          disabled={!isFormValid || isSubmitting} // Disable until form is valid
+        >
           Login
         </Button>,
       ]}
     >
-      <Form form={form} layout="vertical">
+      <Form
+        form={form}
+        layout="vertical"
+        onFieldsChange={handleFormChange} // Track changes in fields
+      >
         {serverError && (
           <Alert
             message={serverError} // Render error message
@@ -86,6 +103,7 @@ const Login = ({ open, onLoginSuccess, onCancel }) => {
             { required: true, message: 'Please enter your email!' },
             { type: 'email', message: 'Please enter a valid email address!' },
           ]}
+          validateTrigger={['onBlur', 'onChange']} // Trigger validation on blur and change
         >
           <Input />
         </Form.Item>
@@ -93,6 +111,7 @@ const Login = ({ open, onLoginSuccess, onCancel }) => {
           name="password"
           label="Password"
           rules={[{ required: true, message: 'Please enter your password!' }]}
+          validateTrigger={['onBlur', 'onChange']}
         >
           <Input.Password />
         </Form.Item>
