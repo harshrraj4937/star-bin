@@ -1,151 +1,114 @@
 import React, { useState } from 'react';
-import { Modal, Form, Input, Button, Alert, message } from 'antd';
-import moment from 'moment';
+import { Modal, Input, Button, Form, notification } from 'antd';
+import moment from 'moment';  // Import moment for date handling
 
 const Registration = ({ open, onRegistrationSuccess, onCancel }) => {
-  const [form] = Form.useForm();
-  const [serverError, setServerError] = useState(null); // State for error messages
-  const [isSubmitting, setIsSubmitting] = useState(false); // Track button loading state
-  const [isFormValid, setIsFormValid] = useState(false); // Track form validity
+  const [loading, setLoading] = useState(false);
 
-  // Track form changes to dynamically update validation state
-  const handleFormChange = (_, allFields) => {
-    const hasErrors = allFields.some(field => field.errors.length > 0);
-    const hasEmptyFields = allFields.some(field => !field.value);
-    setIsFormValid(!hasErrors && !hasEmptyFields);
-  };
+  const handleSubmit = async (values) => {
+    setLoading(true);
+    const registrationData = {
+        ...values,
+        role: 'end_user', // Add the role here
+      };
+    
 
-  const handleOk = async () => {
     try {
-      setServerError(null); // Clear previous errors
-      setIsSubmitting(true); // Set button to loading state
-      const values = await form.validateFields(); // Validate form inputs
-
-      // Set fixed role field
-      values.role = 'end_user'; // For now, this is always "end_user"
-
-      const response = await fetch('http://localhost:4937/auth/register', {
+      // Send the registration data to the server
+      const registerResponse = await fetch('http://localhost:4937/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        body: JSON.stringify(registrationData),
       });
 
-      const data = await response.json();
-      if (response.ok) {
-        // Show success message
-        message.success('Registration successful! You can now log in.');
+      const registerResult = await registerResponse.json();
 
-        // Notify the parent component
-        onRegistrationSuccess(); // Call parent callback on successful registration
+      if (registerResult.message === "User registered successfully") {
+        // Registration successful
+        notification.success({
+          message: 'Registration Successful!',
+          description: 'You can now log in with your credentials.',
+        });
+        onCancel();  // Close the modal on success
       } else {
-        // Handle specific errors
-        if (data.error.includes("email already exists")) {
-          setServerError(
-            <>
-              This email is already registered. <a href="/login">Login</a>
-            </>
-          );
-        } else {
-          // Handle other errors
-          setServerError(data.error);
-        }
+        // If the registration failed (e.g., email already in use)
+        notification.error({
+          message: 'Registration Failed',
+          description: registerResult.error || 'Please try again.',
+        });
       }
     } catch (error) {
-      console.error('Validation or registration error:', error);
-      setServerError('An unexpected error occurred. Please try again.');
-    } finally {
-      setIsSubmitting(false); // Reset button state
+      console.error('Error during registration', error);
+      setLoading(false);
+      notification.error({ message: 'An unexpected error occurred. Please try again.' });
     }
+
+    setLoading(false);
   };
 
   return (
     <Modal
-      open={open}
-      footer={[
-        <Button
-          key="submit"
-          type="primary"
-          onClick={handleOk}
-          loading={isSubmitting} // Show spinner while processing
-          disabled={!isFormValid || isSubmitting} // Disable until form is valid
-        >
-          Register
-        </Button>,
-      ]}
-      onCancel={onCancel} // Close modal on pressing the X
+      visible={open}
+      onCancel={onCancel}
+      footer={null}
+      title="Register"
     >
-      <Form
-        form={form}
-        layout="vertical"
-        onFieldsChange={handleFormChange} // Track changes in fields
-      >
-        {serverError && (
-          <Alert
-            message={serverError} // Render error message
-            type="error"
-            showIcon
-            style={{ marginBottom: '16px' }}
-          />
-        )}
+      <Form onFinish={handleSubmit}>
         <Form.Item
-          name="name"
           label="Name"
-          rules={[{ required: true, message: 'Please enter your name!' }]}
-          validateTrigger={['onBlur', 'onChange']} // Trigger validation on blur and change
+          name="name"
+          rules={[{ required: true, message: 'Please input your name!' }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name="email"
           label="Email"
-          rules={[
-            { required: true, message: 'Please enter your email!' },
-            { type: 'email', message: 'Please enter a valid email address!' },
-          ]}
-          validateTrigger={['onBlur', 'onChange']} // Trigger validation on blur and change
+          name="email"
+          rules={[{ required: true, message: 'Please input your email!' }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name="mobile"
           label="Mobile"
-          rules={[{ required: true, message: 'Please enter your mobile number!' }]}
-          validateTrigger={['onBlur', 'onChange']}
+          name="mobile"
+          rules={[{ required: true, message: 'Please input your mobile number!' }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name="dob"
           label="Date of Birth"
-          rules={[{ required: true, message: 'Please enter your date of birth!' }]}
-          validateTrigger={['onBlur', 'onChange']}
+          name="dob"
+          rules={[{ required: true, message: 'Please input your date of birth!' }]}
         >
-          <Input
-            type="date"
-            max={moment().format('YYYY-MM-DD')}
-            placeholder="YYYY-MM-DD"
+          <Input 
+            type="date" 
+            value={moment().format('YYYY-MM-DD')} 
+            onChange={e => e.preventDefault()} 
           />
         </Form.Item>
 
         <Form.Item
-          name="password"
+          label="Driving License"
+          name="driving_license"
+          rules={[{ required: true, message: 'Please input your driving license number!' }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
           label="Password"
-          rules={[
-            { required: true, message: 'Please enter your password!' },
-            { min: 8, message: 'Password must be at least 8 characters long' },
-          ]}
-          validateTrigger={['onBlur', 'onChange']}
+          name="password"
+          rules={[{ required: true, message: 'Please input your password!' }]}
         >
           <Input.Password />
         </Form.Item>
 
         <Form.Item
-          name="confirmPassword"
           label="Confirm Password"
-          dependencies={['password']}
+          name="confirm_password"
           rules={[
             { required: true, message: 'Please confirm your password!' },
             ({ getFieldValue }) => ({
@@ -157,18 +120,14 @@ const Registration = ({ open, onRegistrationSuccess, onCancel }) => {
               },
             }),
           ]}
-          validateTrigger={['onBlur', 'onChange']}
         >
           <Input.Password />
         </Form.Item>
 
-        <Form.Item
-          name="driving_license"
-          label="Driving License"
-          rules={[{ required: true, message: 'Please enter your driving license number!' }]}
-          validateTrigger={['onBlur', 'onChange']}
-        >
-          <Input />
+        <Form.Item>
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Register
+          </Button>
         </Form.Item>
       </Form>
     </Modal>

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Dropdown, Button } from 'antd';
 import Login from '../login/Login';
+import Registration from '../register/Register'; // Import the Registration component
 import { jwtDecode } from "jwt-decode";
 
 const { Header } = Layout;
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false); // For Login modal visibility
+  const [openRegister, setOpenRegister] = useState(false); // For Register modal visibility
   const [userName, setUserName] = useState(null);
 
   // Check if the user is already logged in (on page load)
@@ -22,13 +24,17 @@ const Navbar = () => {
     }
   }, []); // Runs once on mount
 
-  const showModal = () => {
-    setOpen(true);
+  const showLoginModal = () => {
+    setOpenLogin(true);
+  };
+
+  const showRegisterModal = () => {
+    setOpenRegister(true);
   };
 
   const handleLoginSuccess = (decodedToken) => {
     setUserName(decodedToken.name); // Update the username on successful login
-    setOpen(false); // Close the login modal
+    setOpenLogin(false); // Close the login modal
   };
 
   const handleLogout = () => {
@@ -63,9 +69,14 @@ const Navbar = () => {
                   <Button type="text" style={{ color: '#ffffff' }}>{`Welcome, ${userName}`}</Button>
                 </Dropdown>
               ) : (
-                <Button type="text" onClick={showModal} style={{ color: '#ffffff' }}>
-                  Login
-                </Button>
+                <>
+                  <Button type="text" onClick={showLoginModal} style={{ color: '#ffffff' }}>
+                    Login
+                  </Button>/
+                  <Button type="text" onClick={showRegisterModal} style={{ color: '#ffffff' }}>
+                    Register
+                  </Button>
+                </>
               ),
             },
           ]}
@@ -73,9 +84,14 @@ const Navbar = () => {
       </Header>
 
       <Login
-        open={open}
-        onLoginSuccess={handleLoginSuccess} // Pass callback to Login component
-        onCancel={() => setOpen(false)}
+        open={openLogin}
+        onLoginSuccess={handleLoginSuccess}
+        onCancel={() => setOpenLogin(false)}
+      />
+      <Registration
+        open={openRegister}
+        onRegistrationSuccess={handleLoginSuccess} // Assuming registration also triggers login success
+        onCancel={() => setOpenRegister(false)}
       />
     </Layout>
   );
