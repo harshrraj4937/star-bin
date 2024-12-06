@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Dropdown, Button } from 'antd';
 import Login from '../login/Login';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
+
 const { Header } = Layout;
 
 const Navbar = () => {
@@ -10,18 +11,18 @@ const Navbar = () => {
   const [modalText, setModalText] = useState('Please enter your login details.');
   const [userName, setUserName] = useState(null);
 
+  // Check if the user is already logged in (on page load)
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
       try {
-        const decoded = jwt_decode(token);
-        setUserName(decoded.name);
-      } catch (err) {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+        const decodedToken = jwtDecode(accessToken);  // Decode the JWT token
+        setUserName(decodedToken.name);  // Set the name from the token
+      } catch (error) {
+        console.error('Token decoding error:', error);
       }
     }
-  }, []);
+  }, []); // This runs once on mount
 
   const showModal = () => {
     setOpen(true);
@@ -35,10 +36,14 @@ const Navbar = () => {
     });
     const data = await response.json();
     if (response.ok) {
+      // Save tokens to localStorage
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('refresh_token', data.refresh_token);
-      const decoded = jwt_decode(data.access_token);
-      setUserName(decoded.name);
+
+      // Decode token to get the name
+      const decodedToken = jwtDecode(data.access_token);
+      setUserName(decodedToken.name);  // Set the name from the token
+
       setModalText('Login successful!');
       setTimeout(() => {
         setOpen(false);
@@ -82,10 +87,10 @@ const Navbar = () => {
               key: '4',
               label: userName ? (
                 <Dropdown overlay={<Menu items={menuItems} />}>
-                  <Button type="text">{`Welcome, ${userName}`}</Button>
+                  <Button type="text" style={{ color: '#ffffff' }}>{`Welcome, ${userName}`}</Button>
                 </Dropdown>
               ) : (
-                <Button type="text" onClick={showModal}>
+                <Button type="text" onClick={showModal} style={{ color: '#ffffff' }}>
                   Login
                 </Button>
               ),
@@ -100,6 +105,7 @@ const Navbar = () => {
         onCancel={handleCancel}
         confirmLoading={confirmLoading}
         modalText={modalText}
+        setUserName={setUserName}  // Pass setUserName to the Login component
       />
     </Layout>
   );

@@ -28,7 +28,8 @@ const Login = ({ open, onOk, onCancel }) => {
             setUserName(decodedToken.name);
 
             message.success("Login successful");
-            onOk(); // Close the modal
+            onCancel(); // Close the modal on successful login
+            onOk(); // Call the onOk callback passed from the parent (if needed)
         } catch (error) {
             if (error.response) {
                 message.error(error.response.data.error || "Login failed");
