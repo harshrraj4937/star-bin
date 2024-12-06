@@ -17,12 +17,18 @@ const Login = ({ open, onOk, onCancel }) => {
                 password: values.password,
             });
 
-            const { access_token } = response.data;
+            const { access_token, refresh_token } = response.data;  // Extract both tokens
+
+            // Save the tokens in localStorage
+            localStorage.setItem("access_token", access_token);
+            localStorage.setItem("refresh_token", refresh_token);
+
+            // Decode the token to get the username (or any other information)
             const decodedToken = JSON.parse(atob(access_token.split(".")[1]));
             setUserName(decodedToken.name);
 
             message.success("Login successful");
-            onOk();
+            onOk(); // Close the modal
         } catch (error) {
             if (error.response) {
                 message.error(error.response.data.error || "Login failed");
