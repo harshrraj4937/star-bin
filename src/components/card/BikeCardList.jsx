@@ -6,10 +6,10 @@ const { Title } = Typography;
 
 const BikeList = () => {
   const bikes = [
-    { image: 'https://placehold.co/300x200', name: 'Sporty Bike', price: '$15/day' },
-    { image: 'https://placehold.co/300x200', name: 'Mountain Bike', price: '$18/day' },
-    { image: 'https://placehold.co/300x200', name: 'Electric Scooter', price: '$25/day' },
-    { image: 'https://placehold.co/300x200', name: 'Classic Bike', price: '$12/day' },
+    { image: 'https://placehold.co/300x200?text=R15%0A+V4&font=roboto', name: 'Sporty Bike', price: '$15/day' },
+    { image: 'https://placehold.co/300x200?text=Himalayan%0A+450&font=roboto', name: 'Mountain Bike', price: '$18/day' },
+    { image: 'https://placehold.co/300x200?text=OLA%0A+S1Pro&font=roboto', name: 'Electric Scooter', price: '$25/day' },
+    { image: "https://placehold.co/300x200?text=ThunderBird%0A350X&font=roboto", name: 'Classic Bike', price: '$12/day' },
   ];
 
   return (
