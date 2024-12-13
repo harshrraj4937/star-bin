@@ -35,7 +35,7 @@ const ProductPage = () => {
         <Row gutter={16}>
           <Col lg={16}>
             <img
-              src="https://storage.googleapis.com/a1aa/image/TSB3vag0D0opDJjc2owENllef3rdKcuC1K7JsRvCJdHIoM6TA.jpg"
+              src="https://placehold.co/900x500?text=ThunderBird%0A350X&font=roboto"
               alt="Royal Enfield Hunter 350"
               className="main-image"
             />
