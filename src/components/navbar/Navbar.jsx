@@ -3,6 +3,7 @@ import { Layout, Menu, Dropdown, Button } from 'antd';
 import Login from '../login/Login';
 import Registration from '../register/Register'; // Import the Registration component
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const { Header } = Layout;
 
@@ -10,6 +11,7 @@ const Navbar = () => {
   const [openLogin, setOpenLogin] = useState(false); // For Login modal visibility
   const [openRegister, setOpenRegister] = useState(false); // For Register modal visibility
   const [userName, setUserName] = useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   // Check if the user is already logged in (on page load)
   useEffect(() => {
@@ -59,7 +61,7 @@ const Navbar = () => {
           mode="horizontal"
           defaultSelectedKeys={['1']}
           items={[
-            { key: '1', label: 'Home' },
+            { key: '1', label: 'Home', onClick: () => navigate('/') }, // Navigate to home
             { key: '2', label: 'Start Partnering' },
             { key: '3', label: 'Services' },
             {

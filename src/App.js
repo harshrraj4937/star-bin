@@ -1,20 +1,24 @@
 import React from 'react';
-import Navbar from './components/navbar/Navbar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Layout from './components/layout/Layout'; // Import the Layout component
 import HeroSection from './components/hero/HeroSection';
 import BikeList from './components/card/BikeCardList';
-import ProductPage from './components/productpage/ProductPage'
-import FooterSection from './components/footer/FooterSection';
+import ProductPage from './components/productpage/ProductPage';
 
 const App = () => (
-    <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-grow">
-            <HeroSection />
-            <BikeList />
-            <ProductPage/>
-        </main>
-        <FooterSection />
-    </div>
+    <Router>
+        <Layout>
+            <Routes>
+                <Route path="/" element={
+                    <>
+                        <HeroSection />
+                        <BikeList />
+                    </>
+                } />
+                <Route path="/product" element={<ProductPage />} />
+            </Routes>
+        </Layout>
+    </Router>
 );
 
 export default App;

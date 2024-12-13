@@ -1,4 +1,3 @@
-// ProductPage.js
 import React from "react";
 import { Layout, Button, Rate, Breadcrumb, Card, Row, Col } from "antd";
 import {
@@ -7,20 +6,18 @@ import {
 } from "@ant-design/icons";
 import "./ProductPage.css";
 
-const {Content } = Layout;
+const { Content } = Layout;
 
 const ProductPage = () => {
   return (
     <Layout>
-    
-      <Content className="content">
+      <Content style={{ padding: '64px 24px 24px' }}> {/* Adjust padding-top to match Header height */}
         <h1 className="title">Royal Enfield Hunter 350</h1>
         <div className="ratings-section">
           <Rate disabled defaultValue={5} className="ratings" />
           <span className="ratings-count">1933 Ratings</span>
           <a href='/' className="write-review">
             Write Review
-            {/* only customers who have used the product before can write the review by paymment previous rides or some foreign key relation perhaps? */}
           </a>
         </div>
         <Breadcrumb separator="|" className="breadcrumb">
@@ -39,20 +36,6 @@ const ProductPage = () => {
               alt="Royal Enfield Hunter 350"
               className="main-image"
             />
-            {/* <div className="image-options">
-              <Button icon={<DollarCircleOutlined />} type="text">
-                Colours
-              </Button>
-              <Button icon={<InfoCircleOutlined />} type="text">
-                Images
-              </Button>
-              <Button icon={<CalculatorOutlined />} type="text">
-                Videos
-              </Button>
-              <Button icon={<StarOutlined />} type="text">
-                360° View
-              </Button>
-            </div> */}
           </Col>
           <Col lg={8}>
             <Card className="price-card">
