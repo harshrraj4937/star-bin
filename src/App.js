@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/navbar/Navbar';
 import HeroSection from './components/hero/HeroSection';
 import BikeList from './components/card/BikeCardList';
+import ProductPage from './components/productpage/ProductPage'
 import FooterSection from './components/footer/FooterSection';
 
 const App = () => (
@@ -10,6 +11,7 @@ const App = () => (
         <main className="flex-grow">
             <HeroSection />
             <BikeList />
+            <ProductPage/>
         </main>
         <FooterSection />
     </div>

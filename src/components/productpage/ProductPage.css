@@ -1,0 +1,135 @@
+/* ProductPage.css */
+.header {
+    background: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+  }
+  
+  .logo-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 40px;
+    margin-left: 16px;
+  }
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .search-input {
+    width: 200px;
+  }
+  
+  .content {
+    padding: 24px;
+    background-color: #f7f7f7;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .ratings-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  
+  .ratings {
+    color: #00b894;
+  }
+  
+  .ratings-count {
+    color: #555;
+  }
+  
+  .write-review {
+    color: #00b894;
+  }
+  
+  .breadcrumb {
+    margin: 16px 0;
+  }
+  
+  .breadcrumb-link {
+    color: #555;
+  }
+  
+  .main-image {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .image-options {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  
+  .price-card {
+    margin-top: 16px;
+  }
+  
+  .price-option {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  
+  .option-link {
+    color: #00b894;
+  }
+  
+  .price-details {
+    margin-bottom: 16px;
+  }
+  
+  .price {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .detailed-price-link {
+    color: #00b894;
+    margin-left: 8px;
+  }
+  
+  .on-road-price {
+    color: #555;
+    margin-top: 4px;
+  }
+  
+  .emi-details {
+    margin-bottom: 16px;
+  }
+  
+  .emi-text {
+    color: #555;
+  }
+  
+  .emi-calculator-link {
+    color: #00b894;
+  }
+  
+  .emi-button {
+    margin-bottom: 16px;
+  }
+  
+  .assistance-button {
+    margin-top: 16px;
+  }
+  
