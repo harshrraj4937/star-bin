@@ -54,11 +54,18 @@ const CityModal = () => {
               hoverable
               cover={<img alt={city.name} src={city.image} />}
             >
-              <Card.Meta title={city.name} />
+              <Card.Meta
+                title={
+                  <span style={{ display: 'block', height: '1.5em', lineHeight: '1.5em', overflow: 'hidden' }}>
+                    {city.name}
+                  </span>
+                }
+              />
             </Card>
           </Col>
         ))}
       </Row>
+
     </div>
   );
 };
