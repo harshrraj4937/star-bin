@@ -1,16 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Typography } from 'antd';
 import BikeCard from './BikeCard';
 
 const { Title } = Typography;
 
 const BikeList = () => {
-  const bikes = [
-    { image: 'https://placehold.co/300x200?text=R15%0A+V4&font=roboto', name: 'Sporty Bike', price: '$15/day' },
-    { image: 'https://placehold.co/300x200?text=Himalayan%0A+450&font=roboto', name: 'Mountain Bike', price: '$18/day' },
-    { image: 'https://placehold.co/300x200?text=OLA%0A+S1Pro&font=roboto', name: 'Electric Scooter', price: '$25/day' },
-    { image: "https://placehold.co/300x200?text=ThunderBird%0A350X&font=roboto", name: 'Classic Bike', price: '$12/day' },
-  ];
+  const [bikes, setBikes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchBikes = async () => {
+      try {
+        // Todo Remember!
+        // curently we are getting static city id the idea is as we grow most poplar vehicles will get listed
+        // and as the city is selected we show vehicles based on the selected district city taluka etc 
+        const response = await fetch(
+          'http://localhost:4937/vehicles?location=3&category=2W&fuel_type=Petrol',
+          { headers: { 'Content-Type': 'application/json' } }
+        );
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json();
+        // Transform the API data to match the structure used in BikeCard
+        const formattedData = data.map((item) => ({
+          image: item.photo_url,
+          name: item.model_name,
+          price: `₹${item.price / 1}/day`, // Assuming price is in cents
+        }));
+        setBikes(formattedData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBikes();
+  }, []);
+
+  if (loading) {
+    return <div style={{ textAlign: 'center', padding: '40px' }}>Loading bikes...</div>;
+  }
+
+  if (error) {
+    return <div style={{ textAlign: 'center', padding: '40px', color: 'red' }}>{error}</div>;
+  }
 
   return (
     <section style={{ padding: "40px 20px", backgroundColor: "#f5f5f5" }}>
