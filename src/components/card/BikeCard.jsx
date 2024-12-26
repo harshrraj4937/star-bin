@@ -2,26 +2,22 @@ import React from 'react';
 import { Card, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-const BikeCard = ({ image, name, price }) => {
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+const BikeCard = ({ image, name, price, onClick }) => {
+  const navigate = useNavigate(); // Move useNavigate inside the component
 
-  const handleBookNow = () => {
-    navigate('/product'); // Use navigate to change routes
+  const handleBookNow = (e) => {
+    e.stopPropagation(); // Prevent triggering onClick of the Card
+    navigate('/product'); // Navigate to the product route
   };
 
   return (
     <Card
       hoverable
-      cover={
-        <img
-          alt={name}
-          src={image}
-          style={{ height: "200px", objectFit: "cover", borderRadius: "8px" }}
-        />
-      }
-      style={{ borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}
+      style={{ width: "100%" }}
+      cover={<img alt={name} src={image} style={{ height: "200px", objectFit: "cover" }} />}
+      onClick={onClick} // Trigger onClick when the card is clicked
     >
-      <Card.Meta title={name} description={`Price: ${price}`} />
+      <Card.Meta title={name} description={price} />
       <Button type="primary" style={{ marginTop: "16px", width: "100%" }} onClick={handleBookNow}>
         Book Now
       </Button>
