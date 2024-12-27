@@ -13,6 +13,7 @@ const Navbar = () => {
   const [openRegister, setOpenRegister] = useState(false);
   const [userName, setUserName] = useState(null);
   const [citySelected, setCitySelected] = useState(false);
+  const [selectedCityName, setSelectedCityName] = useState('Select Location');
   const [openCityModal, setOpenCityModal] = useState(false);
   const navigate = useNavigate();
 
@@ -90,7 +91,7 @@ const Navbar = () => {
             }}
             onClick={() => setOpenCityModal(true)}
           >
-            Select Location
+            {selectedCityName}
           </Button>
         </div>
         <Menu
@@ -129,7 +130,13 @@ const Navbar = () => {
         onCancel={handleCityModalCancel}
         width={600}
         footer={null}>
-        <CityModal />
+        <CityModal
+          onSelectCity={(city) => {
+            setCitySelected(true);
+            setSelectedCityName(city.name); // Update the selected city name
+            setOpenCityModal(false); // Close the modal
+          }}
+        />
       </Modal>
 
       <Login

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Input, Button } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Row, Col, Card,} from 'antd';
 
-const CityModal = () => {
-  const [searchValue, setSearchValue] = useState('');
+const CityModal = ({ onSelectCity }) => {
+  const [searchValue,] = useState('');
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -44,7 +43,7 @@ const CityModal = () => {
   return (
     <div className="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <div className="relative mb-6">
-        <Input
+        {/* <Input
           placeholder="Search or type city to select"
           prefix={<SearchOutlined className="text-gray-400" />}
           value={searchValue}
@@ -56,7 +55,7 @@ const CityModal = () => {
               </Button>
             )
           }
-        />
+        /> */}
       </div>
 
       {loading ? (
@@ -70,6 +69,7 @@ const CityModal = () => {
               <Card
                 hoverable
                 cover={<img alt={city.name} src={city.image} />}
+                onClick={() => onSelectCity(city)} // Call the onSelectCity function when a city is clicked
               >
                 <Card.Meta
                   title={
