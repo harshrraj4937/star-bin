@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, Button, Modal } from 'antd';
-import CityModal from '../modal/model'; // Import the new component
+import CityModal from '../modal/model'; 
 
 const { Title, Paragraph } = Typography;
 
@@ -45,7 +45,7 @@ const HeroSection = () => {
         width={600}
         footer={null} // Custom footer for this modal
       >
-        <CityModal /> {/* Load your CityModal component */}
+        <CityModal /> 
       </Modal>
     </div>
   );
